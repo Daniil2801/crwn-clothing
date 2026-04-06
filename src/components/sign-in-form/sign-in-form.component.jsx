@@ -33,7 +33,12 @@ const SignInForm = () => {
             const response = await signInAuthUserWithEmailAndPassword(email, password);
             console.log(response)
             resetFormFields();
-        } catch(error) {}
+        } catch(error) {
+            if (error.code === 'auth/invalid-credential') {
+                alert('incorrect password or email');
+            }
+            console.log(error)
+        }
     }
 
     const handleChange = (event) => {
@@ -67,7 +72,7 @@ const SignInForm = () => {
                 />
                 <div className="buttons-container">
                     <Button type="submit">Sign In</Button>
-                    <Button buttonType='google' onClick={signInWithGoogle}>Sign In with Google</Button>
+                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>Google Sign In</Button>
                 </div>
             </form>
         </div>
